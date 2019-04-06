@@ -20,7 +20,6 @@
 package pl.org.seva.mvvm
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 
@@ -30,6 +29,9 @@ import org.junit.runner.RunWith
 import org.junit.Rule
 import pl.org.seva.mvvm.action.DelayAction
 import pl.org.seva.mvvm.view.MainActivity
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import pl.org.seva.mvvm.mock.MockActivityRecognitionObservable
 
 @RunWith(AndroidJUnit4::class)
 class ActivityRecognitionTest {
@@ -43,10 +45,15 @@ class ActivityRecognitionTest {
     @Test
     fun testActivityRecognition() {
         delay(INITIAL_DELAY)
+        onView(withId(R.id.activity_desc)).check(matches(withText(MockActivityRecognitionObservable.DESC1)))
+        onView(withId(R.id.activity_conf)).check(matches(withText(MockActivityRecognitionObservable.CONF1.toString())))
+        delay(INTERVAL)
+        onView(withId(R.id.activity_desc)).check(matches(withText(MockActivityRecognitionObservable.DESC2)))
+        onView(withId(R.id.activity_conf)).check(matches(withText(MockActivityRecognitionObservable.CONF2.toString())))
     }
 
     companion object {
-        private const val INITIAL_DELAY = 5000L
-        private const val SECOND_MS = 1000L
+        private const val INITIAL_DELAY = 1500L
+        private const val INTERVAL = 1000L
     }
 }
