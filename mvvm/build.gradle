@@ -37,6 +37,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
+    // GMS
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+
     // Kotlin
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.1.0'
     implementation 'org.kodein.di:kodein-di-conf-jvm:6.1.0'
