@@ -27,7 +27,7 @@ import io.reactivex.disposables.CompositeDisposable
 import org.kodein.di.LazyDelegate
 import kotlin.reflect.KProperty
 
-open class RxViewModel : ViewModel() {
+abstract class RxViewModel : ViewModel() {
     private val cd = CompositeDisposable()
 
     protected fun <T> disposableLiveData(observable: () -> Observable<T>) = object : LazyDelegate<LiveData<T>> {
