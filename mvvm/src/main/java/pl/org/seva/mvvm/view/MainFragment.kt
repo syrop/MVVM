@@ -28,7 +28,7 @@ import pl.org.seva.mvvm.R
 import pl.org.seva.mvvm.main.extension.inflate
 import pl.org.seva.mvvm.main.extension.viewModel
 import pl.org.seva.mvvm.viewmodel.ActivityDescViewModel
-import pl.org.seva.mvvm.main.extension.observe
+import pl.org.seva.mvvm.main.extension.invoke
 
 class MainFragment : Fragment() {
 
@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val vm by viewModel<ActivityDescViewModel>()
-        vm.activityDesc.observe(this) {
+        vm.activityDesc(this) {
             activity_desc.text = it.desc
             activity_conf.text = it.conf.toString()
         }
