@@ -26,9 +26,9 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fr_main.*
 import pl.org.seva.mvvm.R
 import pl.org.seva.mvvm.main.extension.inflate
-import pl.org.seva.mvvm.main.extension.viewModel
 import pl.org.seva.mvvm.viewmodel.ActivityDescViewModel
 import pl.org.seva.mvvm.main.extension.invoke
+import pl.org.seva.mvvm.main.extension.provideViewModel
 
 class MainFragment : Fragment() {
 
@@ -37,7 +37,7 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val vm by viewModel<ActivityDescViewModel>()
+        val vm = provideViewModel<ActivityDescViewModel>()
         vm.activityDesc(this) {
             activity_desc.text = it.desc
             activity_conf.text = it.conf.toString()
