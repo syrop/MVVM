@@ -73,8 +73,6 @@ class SensorActivityRecognitionObservable(private val ctx: Context) : ActivityRe
         googleApiClient.connect()
     }
 
-    private fun onNext(activityDesc: ActivityDesc) = subject.onNext(activityDesc)
-
     private inner class Receiver : BroadcastReceiver() {
 
         override fun onReceive(context: Context, intent: Intent) {

@@ -30,10 +30,10 @@ import kotlin.reflect.KProperty
 open class RxViewModel : ViewModel() {
     private val cd = CompositeDisposable()
 
-    protected fun <T> disposableLiveData(observable: Observable<T>) = object : LazyDelegate<LiveData<T>> {
+    protected fun <T> disposableLiveData(observable: () -> Observable<T>) = object : LazyDelegate<LiveData<T>> {
         override fun provideDelegate(receiver: Any?, prop: KProperty<Any?>) = lazy {
             MutableLiveData<T>().apply {
-                cd.add(observable.subscribe { this.postValue(it) })
+                cd.add(observable().subscribe { this.postValue(it) })
             }
         }
     }

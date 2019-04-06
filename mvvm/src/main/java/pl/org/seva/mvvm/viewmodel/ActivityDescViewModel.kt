@@ -22,5 +22,5 @@ package pl.org.seva.mvvm.viewmodel
 import pl.org.seva.mvvm.model.ar
 
 class ActivityDescViewModel : RxViewModel() {
-    val activityDesc by disposableLiveData(ar.observable)
+    val activityDesc by disposableLiveData { ar.observable }
 }
