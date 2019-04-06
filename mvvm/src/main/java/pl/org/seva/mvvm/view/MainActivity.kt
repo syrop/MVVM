@@ -17,13 +17,26 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.mvvm.model
+package pl.org.seva.mvvm.view
 
-import io.reactivex.Observable
-import pl.org.seva.mvvm.main.instance
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import kotlinx.android.synthetic.main.act_main.*
+import pl.org.seva.mvvm.R
 
-val ar by instance<ActivityRecognitionObservable>()
+class MainActivity: AppCompatActivity() {
 
-interface ActivityRecognitionObservable {
-    val observable: Observable<ActivityDesc>
+    private val navController by lazy { findNavController(R.id.nav_host_fragment) }
+
+    @SuppressLint("CheckResult")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.act_main)
+        setSupportActionBar(toolbar)
+        NavigationUI.setupActionBarWithNavController(this, navController)
+    }
 }

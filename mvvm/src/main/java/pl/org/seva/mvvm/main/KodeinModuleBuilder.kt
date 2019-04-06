@@ -28,6 +28,7 @@ import org.kodein.di.generic.multiton
 import org.kodein.di.generic.singleton
 import pl.org.seva.mvvm.BuildConfig
 import pl.org.seva.mvvm.model.ActivityRecognitionObservable
+import pl.org.seva.mvvm.model.SensorActivityRecognitionObservable
 import java.util.logging.Logger
 
 val Context.module get() = KodeinModuleBuilder(this).build()
@@ -47,6 +48,6 @@ class KodeinModuleBuilder(private val ctx: Context) {
                 }
             }
         }
-        bind<ActivityRecognitionObservable>() with  singleton { ActivityRecognitionObservable(ctx) }
+        bind<ActivityRecognitionObservable>() with  singleton { SensorActivityRecognitionObservable(ctx) }
     }
 }

@@ -5,7 +5,7 @@
 
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <application
-        android:name="pl.org.seva.mvvm.view.MvvmApplication"
+        android:name="pl.org.seva.mvvm.main.MvvmApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="pl.org.seva.mvvm.main.MainActivity"
+            android:name="pl.org.seva.mvvm.view.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

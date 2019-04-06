@@ -17,13 +17,17 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.mvvm.model
+package pl.org.seva.mvvm.mock
 
-import io.reactivex.Observable
-import pl.org.seva.mvvm.main.instance
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
+import pl.org.seva.mvvm.model.ActivityRecognitionObservable
 
-val ar by instance<ActivityRecognitionObservable>()
+val mockModule get() = MockModuleBuilder().build()
 
-interface ActivityRecognitionObservable {
-    val observable: Observable<ActivityDesc>
+class MockModuleBuilder {
+    fun build() = Kodein.Module("test") {
+        bind<ActivityRecognitionObservable>(overrides = true) with singleton { MockActivityRecognitionObservable() }
+    }
 }

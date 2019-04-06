@@ -17,13 +17,29 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.mvvm.model
+package pl.org.seva.mvvm.action
 
-import io.reactivex.Observable
-import pl.org.seva.mvvm.main.instance
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import android.view.View
 
-val ar by instance<ActivityRecognitionObservable>()
+import org.hamcrest.Matcher
 
-interface ActivityRecognitionObservable {
-    val observable: Observable<ActivityDesc>
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
+
+class DelayAction private constructor(private val millis: Long) : ViewAction {
+
+    override fun getConstraints(): Matcher<View> = isRoot()
+
+    override fun getDescription(): String = "wait $millis milliseconds"
+
+    override fun perform(uiController: UiController, view: View) {
+        uiController.loopMainThreadUntilIdle()
+        uiController.loopMainThreadForAtLeast(millis)
+    }
+
+    companion object {
+
+        fun delay(millis: Long): ViewAction = DelayAction(millis)
+    }
 }

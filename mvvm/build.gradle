@@ -12,7 +12,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName '1.0'
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'pl.org.seva.mvvm.mock.MockTestRunner'
     }
 
     buildTypes {
@@ -36,6 +36,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'androidx.test:rules:1.1.1'
+    implementation 'androidx.test:runner:1.1.1'
 
     // GMS
     implementation 'com.google.android.gms:play-services-location:16.0.0'
@@ -49,6 +51,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha02'
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha02'
 
-    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }

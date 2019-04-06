@@ -17,13 +17,16 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.mvvm.model
+package pl.org.seva.mvvm.mock
 
-import io.reactivex.Observable
-import pl.org.seva.mvvm.main.instance
+import android.app.Application
+import android.content.Context
+import androidx.test.runner.AndroidJUnitRunner
 
-val ar by instance<ActivityRecognitionObservable>()
+@Suppress("unused")  // Declared in build.gradle
+class MockTestRunner : AndroidJUnitRunner() {
 
-interface ActivityRecognitionObservable {
-    val observable: Observable<ActivityDesc>
+    override fun newApplication(
+        cl: ClassLoader, className: String, context: Context): Application =
+        super.newApplication(cl, MockApplication::class.java.name, context)
 }
