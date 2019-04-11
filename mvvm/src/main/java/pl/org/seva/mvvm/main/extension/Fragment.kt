@@ -25,7 +25,7 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 
-inline fun <reified R : ViewModel> Fragment.provideViewModel() = activity!!.provideViewModel<R>()
+inline fun <reified R : ViewModel> Fragment.getViewModel() = activity!!.getViewModel<R>()
 
 fun Fragment.inflate(@LayoutRes resource: Int, root: ViewGroup?): View =
         layoutInflater.inflate(resource, root, false)
