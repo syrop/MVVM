@@ -19,17 +19,20 @@
 
 package pl.org.seva.mvvm.mock
 
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.*
 import pl.org.seva.mvvm.model.ActivityDesc
 import pl.org.seva.mvvm.model.ActivityRecognitionObservable
-import java.util.concurrent.TimeUnit
 
-class MockActivityRecognitionObservable : ActivityRecognitionObservable {
+class MockActivityRecognitionObservable : ActivityRecognitionObservable() {
 
-    override val observable: Observable<ActivityDesc> =
-            Observable.interval(1, TimeUnit.SECONDS, Schedulers.io())
-                    .map { if (it % 2L == 0L) ACT1 else ACT2 }
+    init {
+        GlobalScope.launch(Dispatchers.IO) {
+            repeat(Int.MAX_VALUE) {
+                delay(1000)
+                channel.offer(if (it % 2L == 0L) ACT1 else ACT2)
+            }
+        }
+    }
 
     companion object {
         const val DESC1 = "on foot"

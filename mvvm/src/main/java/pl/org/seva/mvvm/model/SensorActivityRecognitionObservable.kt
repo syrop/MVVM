@@ -29,14 +29,9 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.ActivityRecognition
 import com.google.android.gms.location.ActivityRecognitionResult
 import com.google.android.gms.location.DetectedActivity
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 import pl.org.seva.mvvm.R
 
-class SensorActivityRecognitionObservable(private val ctx: Context) : ActivityRecognitionObservable {
-    private val subject = PublishSubject.create<ActivityDesc>()
-
-    override val observable: Observable<ActivityDesc> = subject
+class SensorActivityRecognitionObservable(private val ctx: Context) : ActivityRecognitionObservable() {
 
     init {
         var activityRecognitionReceiver : BroadcastReceiver? = null
@@ -90,7 +85,7 @@ class SensorActivityRecognitionObservable(private val ctx: Context) : ActivityRe
                 })
                 val confidence = activity.confidence
                 val activityDesc = ActivityDesc(desc, confidence)
-                subject.onNext(activityDesc)
+                channel.offer(activityDesc)
             }
         }
     }

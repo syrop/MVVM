@@ -19,8 +19,23 @@
 
 package pl.org.seva.mvvm.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import pl.org.seva.mvvm.model.ActivityDesc
 import pl.org.seva.mvvm.model.ar
 
-class ActivityDescViewModel : RxViewModel() {
-    val activityDesc by disposableLiveData { ar.observable }
+class ActivityDescViewModel : ViewModel() {
+    private val activityDescMutable by lazy { MutableLiveData<ActivityDesc>() }
+    val activityDesc: LiveData<ActivityDesc> by lazy { activityDescMutable }
+
+    init {
+        viewModelScope.launch {
+            while (true) {
+                activityDescMutable.postValue(ar.activities.receive())
+            }
+        }
+    }
 }

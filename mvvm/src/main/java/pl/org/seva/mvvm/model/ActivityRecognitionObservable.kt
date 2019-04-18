@@ -19,11 +19,13 @@
 
 package pl.org.seva.mvvm.model
 
-import io.reactivex.Observable
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
 import pl.org.seva.mvvm.main.instance
 
 val ar by instance<ActivityRecognitionObservable>()
 
-interface ActivityRecognitionObservable {
-    val observable: Observable<ActivityDesc>
+abstract class ActivityRecognitionObservable {
+    protected val channel = Channel<ActivityDesc>(Channel.CONFLATED)
+    val activities: ReceiveChannel<ActivityDesc> = channel
 }
