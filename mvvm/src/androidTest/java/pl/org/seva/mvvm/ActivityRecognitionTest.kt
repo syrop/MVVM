@@ -31,7 +31,7 @@ import pl.org.seva.mvvm.action.DelayAction
 import pl.org.seva.mvvm.view.MainActivity
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import pl.org.seva.mvvm.mock.MockActivityRecognitionObservable
+import pl.org.seva.mvvm.mock.MockActivityRecognition
 
 @RunWith(AndroidJUnit4::class)
 class ActivityRecognitionTest {
@@ -45,11 +45,11 @@ class ActivityRecognitionTest {
     @Test
     fun testActivityRecognition() {
         delay(INITIAL_DELAY)
-        onView(withId(R.id.activity_desc)).check(matches(withText(MockActivityRecognitionObservable.DESC1)))
-        onView(withId(R.id.activity_conf)).check(matches(withText(MockActivityRecognitionObservable.CONF1.toString())))
+        onView(withId(R.id.activity_desc)).check(matches(withText(MockActivityRecognition.DESC1)))
+        onView(withId(R.id.activity_conf)).check(matches(withText(MockActivityRecognition.CONF1.toString())))
         delay(INTERVAL)
-        onView(withId(R.id.activity_desc)).check(matches(withText(MockActivityRecognitionObservable.DESC2)))
-        onView(withId(R.id.activity_conf)).check(matches(withText(MockActivityRecognitionObservable.CONF2.toString())))
+        onView(withId(R.id.activity_desc)).check(matches(withText(MockActivityRecognition.DESC2)))
+        onView(withId(R.id.activity_conf)).check(matches(withText(MockActivityRecognition.CONF2.toString())))
     }
 
     companion object {

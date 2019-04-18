@@ -22,12 +22,12 @@ package pl.org.seva.mvvm.mock
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
-import pl.org.seva.mvvm.model.ActivityRecognitionObservable
+import pl.org.seva.mvvm.model.ChannelActivityRecognition
 
 val mockModule get() = MockModuleBuilder().build()
 
 class MockModuleBuilder {
     fun build() = Kodein.Module("test") {
-        bind<ActivityRecognitionObservable>(overrides = true) with singleton { MockActivityRecognitionObservable() }
+        bind<ChannelActivityRecognition>(overrides = true) with singleton { MockActivityRecognition() }
     }
 }

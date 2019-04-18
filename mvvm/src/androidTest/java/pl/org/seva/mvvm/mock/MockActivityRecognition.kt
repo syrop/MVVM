@@ -17,15 +17,30 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.mvvm.model
+package pl.org.seva.mvvm.mock
 
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.ReceiveChannel
-import pl.org.seva.mvvm.main.instance
+import kotlinx.coroutines.*
+import pl.org.seva.mvvm.model.ActivityDesc
+import pl.org.seva.mvvm.model.ChannelActivityRecognition
 
-val ar by instance<ActivityRecognitionObservable>()
+class MockActivityRecognition : ChannelActivityRecognition() {
 
-abstract class ActivityRecognitionObservable {
-    protected val channel = Channel<ActivityDesc>(Channel.CONFLATED)
-    val activities: ReceiveChannel<ActivityDesc> = channel
+    init {
+        GlobalScope.launch(Dispatchers.IO) {
+            repeat(Int.MAX_VALUE) {
+                delay(1000)
+                channel.offer(if (it % 2L == 0L) ACT1 else ACT2)
+            }
+        }
+    }
+
+    companion object {
+        const val DESC1 = "on foot"
+        const val CONF1 = 50
+        const val DESC2 = "in vehicle"
+        const val CONF2 = 100
+
+        private val ACT1 = ActivityDesc(DESC1, CONF1)
+        private val ACT2 = ActivityDesc(DESC2, CONF2)
+    }
 }

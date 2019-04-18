@@ -31,7 +31,7 @@ import com.google.android.gms.location.ActivityRecognitionResult
 import com.google.android.gms.location.DetectedActivity
 import pl.org.seva.mvvm.R
 
-class SensorActivityRecognitionObservable(private val ctx: Context) : ActivityRecognitionObservable() {
+class SensorActivityRecognition(private val ctx: Context) : ChannelActivityRecognition() {
 
     init {
         var activityRecognitionReceiver : BroadcastReceiver? = null

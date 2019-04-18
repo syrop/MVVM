@@ -25,8 +25,8 @@ import org.kodein.di.conf.global
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
-import pl.org.seva.mvvm.model.ActivityRecognitionObservable
-import pl.org.seva.mvvm.model.SensorActivityRecognitionObservable
+import pl.org.seva.mvvm.model.ChannelActivityRecognition
+import pl.org.seva.mvvm.model.SensorActivityRecognition
 
 val Context.module get() = KodeinModuleBuilder(this).build()
 
@@ -36,6 +36,6 @@ class KodeinModuleBuilder(private val ctx: Context) {
 
     fun build() = Kodein.Module("main") {
         bind<Bootstrap>() with singleton { Bootstrap() }
-        bind<ActivityRecognitionObservable>() with  singleton { SensorActivityRecognitionObservable(ctx) }
+        bind<ChannelActivityRecognition>() with  singleton { SensorActivityRecognition(ctx) }
     }
 }
