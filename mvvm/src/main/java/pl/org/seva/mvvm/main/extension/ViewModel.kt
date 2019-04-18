@@ -17,15 +17,21 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.mvvm.viewmodel
+package pl.org.seva.mvvm.main.extension
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import pl.org.seva.mvvm.main.extension.channelLiveData
-import pl.org.seva.mvvm.model.ActivityDesc
-import pl.org.seva.mvvm.model.ar
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.launch
 
-class ActivityDescViewModel : ViewModel() {
-    private val activityDescMutable by channelLiveData { ar.activities }
-    val activityDesc: LiveData<ActivityDesc> by lazy { activityDescMutable }
+fun <T> ViewModel.channelLiveData(channel: () -> ReceiveChannel<T>) = lazy {
+    MutableLiveData<T>().apply {
+        viewModelScope.launch(Dispatchers.IO) {
+            while (true) {
+                postValue(channel().receive())
+            }
+        }
+    }
 }
