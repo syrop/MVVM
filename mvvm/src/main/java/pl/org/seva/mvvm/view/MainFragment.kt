@@ -20,20 +20,14 @@
 package pl.org.seva.mvvm.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fr_main.*
 import pl.org.seva.mvvm.R
-import pl.org.seva.mvvm.main.extension.inflate
 import pl.org.seva.mvvm.viewmodel.ActivityDescViewModel
 import pl.org.seva.mvvm.main.extension.invoke
 import pl.org.seva.mvvm.main.extension.getViewModel
 
-class MainFragment : Fragment() {
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-            inflate(R.layout.fr_main, container)
+class MainFragment : Fragment(R.layout.fr_main) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
